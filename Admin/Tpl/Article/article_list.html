@@ -1,0 +1,133 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <div class="current">文章列表</div>
+                        <if condition="empty($is_top_menu_true)">
+	                    <div style="width: 100px;float: right;">
+	                    	<button type="button" class="btn" onclick="window.location.href='{jkd_:U('Jkd/Article/article_add', array('cid' => $cid))}'">添加文章</button>
+	                    </div>
+	                    </if>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>新闻标题</td>
+                                <td>所在分类</td>
+                                <td>发布时间</td>
+                                <td>状态</td>
+                                <td>手机状态</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <volist name="article_list" id="jkd">
+                            <tr align="center" id="{jkd_$jkd.id}">
+                                <td align="left">
+                                	<img src="__PUBLIC__/img/{jkd_$jkd.lang}.png">
+                                	<a href="javascript:void(0);">{jkd_$jkd.title}</a>
+                                </td>
+                                <td>{jkd_$jkd.menu_name}</td>
+                                <td>{jkd_$jkd.published|date="Y-m-d H:i:s",###}</td>
+                                <td>
+                                	<a href="javascript:void(0);" onclick="changeStatus({jkd_$jkd.id},this)">
+                                		<if condition="$jkd['status'] eq 0">待审核</if>
+                                		<if condition="$jkd['status'] eq 1">已发布</if>
+                                	</a>
+                                </td>
+                                <td>
+                                	<a href="javascript:void(0);" onclick="changeAttr({jkd_$jkd.id},this)">
+                                		<img src="__PUBLIC__/img/iphone-{jkd_$jkd.is_m}.png" title='单击切换当前显示状态' border="0">
+                                	</a>
+                                </td>
+                                <td>
+                                	[ <a href="{jkd_:U('Jkd/Article/article_copy', array('aid' => $jkd['id'], 'cid' => $cid))}">复制 </a> ]
+                                	[ <a href="{jkd_:U('Jkd/Article/article_edit', array('aid' => $jkd['id'], 'cid' => $cid))}">编辑 </a> ] 
+                                	[ <a link="{jkd_:U('Jkd/Article/del/',array('id'=>$jkd['id']))}" href="javascript:void(0)" name="{jkd_$jkd.title}" class="del">删除 </a> ]
+                                </td>
+                            </tr>
+                        </volist>
+                        <tr><td colspan="7" align="right">{jkd_$page}</td></td></tr>
+                        <tr>
+                        	<td colspan="7" align="left">
+                            <form action="{jkd_:U('Jkd/Article/article_list')}" method="get">
+								标题：<input type="text" name="title" value="{jkd_$s_title}" size="30" style="margin-right: 20px;">
+                           		分类：<select name="cid" style="margin-right: 20px;">
+                            			<option value="">--请选择--</option>
+                                			<volist name="menu_list" id="jkd">
+                                    			<option value="{jkd_$jkd.id}" <if condition="$jkd['id'] eq $cid">selected='selected'</if>>{jkd_$jkd.menu_name}</option>
+                                			</volist>
+                            			</select>
+                            	状态：<select name="status" style="margin-right: 20px;">
+		                           		<option value="">--请选择--</option>
+		                                <option value="1" <if condition="$s_status eq 1">selected='selected'</if>>已发布</option>
+		                                <option value="2" <if condition="$s_status eq 2">selected='selected'</if>>未审核</option>
+		                        	</select>
+								手机状态：<select name="is_m" style="margin-right: 20px;">
+		                            	<option value="">--请选择--</option>
+		                                <option value="1" <if condition="$s_is_m eq 1">selected='selected'</if>>显示</option>
+		                                <option value="2" <if condition="$s_is_m eq 2">selected='selected'</if>>隐藏</option>
+									</select>
+									<input type='hidden' value='{jkd_$cid}' name='h_cid' /> 
+                            		<input type="submit" value="搜索" class='sub'>&nbsp;&nbsp;&nbsp;
+                       		 		<if condition="empty($is_top_menu_true)">
+                            		<input type="button" value="添加文章" class='sub' onclick="window.location.href='{jkd_:U('Jkd/Article/article_add', array('cid' => $cid))}'" />
+                            		</if>
+                            </form>
+                        	</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+
+	        $(".del").click(function(){
+	            var delLink=$(this).attr("link");
+	            $this = $(this);
+	            popup.confirm('确定删除【<b>'+$(this).attr("name")+'</b>】，确定?','温馨提示',function(action){
+	                if(action == 'ok'){
+	                    delByLink(delLink, $this);
+	                }
+	            });
+	            return false;
+	        });
+	        
+        });
+        function changeAttr(id,v){
+            $.get("__URL__/changeAttr/id/"+id,function(data){
+                if(data.status == 1){
+                    $(v).html(data.info);
+                }
+            }, 'json');
+        }
+        function changeStatus(id,v){
+            $.get("__URL__/changeStatus/id/"+id,function(data){
+                if(data.status==1){
+                    $(v).html(data.info);
+                }
+            }, 'json');
+        }
+		</script>
+    </body>
+</html>

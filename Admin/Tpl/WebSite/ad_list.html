@@ -1,0 +1,89 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <div class="current">广告列表</div>
+                        <div style="width: 100px;float: right;">
+	                    	<a href="{jkd_:U('Jkd/WebSite/ad_add')}" class="btn" >添加广告</a>
+	                    </div>
+                    </div>
+                    <form action='' method='post'>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>排序</td>
+                                <td>广告说明</td>
+                                <td>广告尺寸</td>
+                                <td>点击量</td>
+                                <td>引用模板</td>
+                                <td>图片地址</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name='ad_list' item='jkd'>
+                        	<tr>
+                        		<td align='center'><input type='text' class='input' name="sort[{jkd_$jkd.id}]" value="{jkd_$jkd.sort}" size='1' /></td>
+                        		<td align='center'>{jkd_$jkd.ad_explain}</td>
+                        		<td align='center'>{jkd_$jkd.ad_img_width}x{jkd_$jkd.ad_img_height}</td>
+                        		<td align='center'>{jkd_$jkd.click}</td>
+                        		<td align='center'>&#123;jkd_:get_ad('{jkd_$jkd.id}')&#125;</td>
+                        		<td align='center'>{jkd_$jkd.ad_img_src}</td>
+                        		<td align='center'>
+                        			<a href="{jkd_:C('site_url')}{jkd_$jkd.ad_img_src}" target='_blank'>[预览]</a>&nbsp;&nbsp;
+                        			<a href="{jkd_:U('Jkd/WebSite/ad_edit', array('id' => $jkd['id']))}" >[编辑]</a>&nbsp;&nbsp;
+                        			<a link="{jkd_:U('Jkd/WebSite/ad_del', array('id' => $jkd['id']))}" href="javascript:void(0)" name="{jkd_$jkd.ad_explain}" class="del">[删除]</a>
+                        		</td>
+                        	</tr>
+                        	</foreach>
+                        </tbody>
+                        <tr>
+                        	<td align="left"><input type='button' value='提交' class='submit sub' /></td>
+                        	<td colspan="6" align="right">{jkd_$page}</td>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+		<script type="text/javascript">
+		//删除栏目
+		    $(function(){
+		        $(".del").click(function(){
+		            var delLink=$(this).attr("link");
+		            $this = $(this);
+		            popup.confirm('确定删除【<b>'+$(this).attr("name")+'</b>】，确定?','温馨提示',function(action){
+		                if(action == 'ok'){
+		                    delByLink(delLink, $this);
+		                }
+		            });
+		            return false;
+		        });
+		    });
+		</script>
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

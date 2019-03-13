@@ -1,0 +1,119 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    	 <css href="__PUBLIC__/css/img_about.css"/>
+        <!-- kindeditor -->
+        <script src="__ROOT__/public/editors/kindeditor/kindeditor.js"></script>
+		<script src="__ROOT__/public/editors/kindeditor/lang/zh_CN.js"></script>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <div class="current">添加编辑新闻</div>
+                    </div>
+                    <form action='' method='post'>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        	
+                            <tr>
+                                <th width="100">所属分类：</th>
+                                <td>
+									<select name="info[type]" >
+										<option value="">请选择</option>
+										<foreach name='menu_list' item='sk'>
+											<option value='{jkd_$sk.id}' <if condition="$info['type'] eq $sk['id']">selected='selected'</if>>{jkd_:str_repeat('&nbsp;&nbsp;&nbsp;&nbsp;', $sk['level'])}<if condition='$sk["level"] gt 1'>|--</if>{jkd_$sk.menu_name}</option>
+										</foreach>
+									</select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th width="100">标题：</th>
+                                <td><input id="title" type="text" class="input" size="30" name="info[explain]" value="{jkd_$info.explain}"/></td>
+                            </tr>
+                            <tr>
+                                <th>轮播图片地址：</th>
+                                <td>
+                                	<div class="instructions del_image">删除</div>
+                                    <div class="droparea spot" id="ad_img" style="background-image: url({jkd_$info.img_src}); cursor:pointer;background-size: 220px 160px;">
+	                                    <input type="hidden" name="info[img_src]" id="ad_img_val" value="{jkd_$info.img_src}">
+                                    </div>
+                            	</td>
+                            </tr>
+                            <tr>
+                                <th>alt属性：</th>
+                                <td><input type="text" class="input" size="20" name="info[img_alt]" value="{jkd_$info.img_alt}"/> （seo优化）</td>
+                            </tr>
+                            <tr>
+                                <th>排序：</th>
+                                <td><input type="text" class="input" size="5" name="info[sort]" value="{jkd_$info.sort}" /></td>
+                            </tr>
+                            <tr>
+                                <th>跳转地址：</th>
+                                <td><input type="text" class="input" size="70" name="info[url]" value="{jkd_$info.url}"/></td>
+                            </tr>
+                            <if condition="!empty($id)">
+                            	<input type='hidden' value="{jkd_$id}" name='id' />
+                            </if>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                $(".submit").click(function(){
+                    if($('#title').val()==''){
+                        popup.error('广告说明不能为空！');
+                        return false;
+                    }
+                    commonAjaxSubmit("");
+                    return false;
+                });
+                //删除图片  
+                $(".del_image").click(function(){
+                	$(this).siblings('.spot').css('background-image','');
+                	$(this).siblings('.spot').children('input').val('');
+               	}); 
+            });
+        </script>
+		<script type='text/javascript'>	
+		KindEditor.ready(function(K) {
+	          K.create();
+	          var editor = K.editor({
+	              allowFileManager : true,
+	              uploadJson : '__ROOT__/public/editors/kindeditor/php/upload_json.php?dirname=banner',
+	              fileManagerJson:'__ROOT__/public/editors/kindeditor/php/file_manager_json.php?dirname=banner'
+	              //sdl:false
+	          });
+	          K('#ad_img').click(function() {
+	              editor.loadPlugin('image', function() {
+	                  editor.plugin.imageDialog({
+	                      imageUrl : K('#ad_img_val').val(),
+	                      clickFn : function(url, title, width, height, border, align) {
+	                          K('#ad_img_val').val(url);
+                              $('#ad_img').css('background-image','url('+url+')').css('background-size','220px 160px');
+	                          editor.hideDialog();
+	                      }
+	                  });
+	              });
+	          });
+	      });
+		</script>
+    </body>
+</html>

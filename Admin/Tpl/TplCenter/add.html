@@ -1,0 +1,57 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item hr">
+	                        <div class="current">模板编辑</div>
+	                    </div>
+	                    <form action="" name="myform" method="post" enctype="multipart/form-data">                
+							<table width="95%" border="0"  align=center cellpadding="3" cellspacing="2" class="table1">
+								<tr> 
+									<td width="10%" >当前模板位置</td>
+									<td class="b1_1">
+										<input type="text" name="filename" class='input' size ="100" value="{jkd_$filename}"><span>（不允许用 “..” 形式的路径）</span>
+									</td>
+								</tr>
+								<tr>
+									<td valign="top" ><p>内容</p>
+									<td >
+									<textarea id="Content" name="content" style="width:700px;height:450px;">{jkd_$content}</textarea>
+									</td>
+								</tr>
+							</table>
+	                    </form>
+	                    <div class="commonBtnArea" >
+	                        <button class="btn submit">编辑</button>
+							<input type="button" onClick="history.go(-1);" class="btn btn-info" value="返 回">
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit("{jkd_:U('TplCenter/update')}");
+		    });
+        });
+		</script>
+    </body>
+</html>

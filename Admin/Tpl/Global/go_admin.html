@@ -1,0 +1,54 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item hr">
+	                        <div class="current">修改后台入口</div>
+	                    </div>
+	                    <form action="" method="post">
+	                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+	                            <tr>
+	                                <th width="120">旧入口名：</th>
+	                                <td><input name="old_admin_name" type="text" class="input" size="40" value="" /></td>
+	                            	<td></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">新入口名：</th>
+	                                <td><input name="new_admin_name" type="text" class="input" size="40" value="" /></td>
+	                            	<td></td>
+	                            </tr>
+	                        </table>
+	                    </form>
+	                    <div class="commonBtnArea" >
+	                        <button class="btn submit">提交</button>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

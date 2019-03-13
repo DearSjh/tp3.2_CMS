@@ -1,0 +1,22 @@
+table a:hover {color:red;text-decoration:underline}
+.margin30{margin-right:30px;}
+.margin40{margin-right:40px;}
+.margin45{margin-right:45px;}
+.margin50{margin-right:50px;}
+.margin300{margin-right:120px;}
+
+
+table .jkd_info_t {color:#09C;font-weight:700;line-height:21px;}
+.jkd_table td{border-style:none;}
+.jkd_table td a{margin-left:5px;margin-right:5px;}
+
+table .myinfo li {background:url(../img/yuan.png) no-repeat 0 7px;padding-left:20px;}
+
+.jkd_table_a a{color:#000;}
+.jkd_table_a a:hover{color:#000;text-decoration:underline;}
+
+table tr td span.jkd_introduce {color:#999;word-break:break-all;}
+table tr td span.jkd_introduce:hover {color:#000;}
+
+table .sub {cursor:pointer;}
+table .sub:hover{color:blue;}

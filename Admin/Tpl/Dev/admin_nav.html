@@ -1,0 +1,39 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    	<style type='text/css'> .tab td {padding:15px 10px;}</style>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">导航管理</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                       	<tr>                                
+                       		<td align="center" colspan='2'>
+                       			<a href="{jkd_:U('Jkd/Dev/admin_nav_list', array('cid' => 1))}" class="btn submit">左侧导航（常规操作）</a>
+                       		</td>
+                       		<td align="center" colspan='2'>
+                       			<a href="{jkd_:U('Jkd/Dev/admin_nav_list', array('cid' => 2))}" class="btn submit">头部导航</a>
+                       		</td>
+                    	</tr>
+					</table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+    </body>
+</html>

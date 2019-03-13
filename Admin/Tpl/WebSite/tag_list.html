@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">字段管理</div>
+	                    <div style="width: 100px;float: right;">
+	                    	<a href="{jkd_:U('Jkd/WebSite/tag_add')}" class="btn" >添加标签</a>
+	                    </div>
+                    </div>
+                    <form action='' method='post'>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>ID</td>
+                                <td>标题</td>
+                                <td>标识</td>
+                                <td>语言</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name='tag_list' item='jkd'>
+                        	<tr>
+                        		<td align='center'>{jkd_$jkd.id}</td>
+                        		<td align='center'>{jkd_$jkd.name}</td>
+                        		<td align='center'>{jkd_$jkd.unique_id}</td>
+                        		<td align='center'>
+                        			<if condition="$jkd['lang'] eq 'zh-cn'">简体中文</if>
+                        			<if condition="$jkd['lang'] eq 'zh-en'">English</if>
+								</td>
+                        		<td align='center'>
+                        			<a href="{jkd_:U('Jkd/WebSite/tag_edit', array('id' => $jkd['id']))}" >编辑</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        			<a link="{jkd_:U('Jkd/WebSite/tag_del', array('id' => $jkd['id']))}" href="javascript:void(0)" name="{jkd_$jkd.name}" class="del">删除</a>
+                        		</td>
+                        	</tr>
+                        	</foreach>
+                        </tbody>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+		<script type="text/javascript">
+		//删除栏目
+		    $(function(){
+		        $(".del").click(function(){
+		            var delLink=$(this).attr("link");
+		            $this = $(this);
+		            popup.confirm('确定删除【<b>'+$(this).attr("name")+'</b>】，确定?','温馨提示',function(action){
+		                if(action == 'ok'){
+		                    delByLink(delLink, $this);
+		                }
+		            });
+		            return false;
+		        });
+		    });
+		</script>
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

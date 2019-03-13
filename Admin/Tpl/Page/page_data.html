@@ -1,0 +1,189 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    	<!-- 初始化百度编辑器  -->
+    	<js href="__ROOT__/public/editors/ueditor/ueditor.config.js,__ROOT__/public/editors/ueditor/ueditor.all.min.js"/>
+	    <style>
+            div.spot {
+                float: left;
+                margin: 0 20px 0 0;
+                width: 220px;
+                min-height: 160px;   
+                border: 2px dashed #ddd;
+           		border-top:0px;            	
+            }
+            .droparea {
+                position: relative;
+                text-align: center;
+            }
+            .instructions {
+                opacity: 0.8;
+                width: 220px;            
+                background-color: #cccccc;
+                height: 25px;
+                z-index: 10;
+                zoom: 1;
+            	text-align: center;
+                border: 2px dashed #ddd;    
+           		border-bottom:0px;        
+                background-position: initial initial;
+                background-repeat: initial initial;
+                cursor: pointer;
+            }
+            .droparea div, .droparea input {
+                position: absolute;
+                top: 0;
+                width: 100%;
+                height: 100%;
+            }
+            .droparea input {
+                cursor: pointer;
+                opacity: 0;
+            }
+        </style>
+        <!-- kindeditor -->
+        <script src="__ROOT__/public/editors/kindeditor/kindeditor.js"></script>
+		<script src="__ROOT__/public/editors/kindeditor/lang/zh_CN.js"></script>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <div class="current">添加编辑单页</div>
+                    </div>
+                    <form action="" method='post'>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        	<if condition="$show_default_fields_status[0] eq 1">
+                            <tr>
+                                <th>语言选择：</th>
+                                <td>
+                                    <select name="info[lang]">
+                                        <option value="zh-cn" <if condition="$page_info['lang'] eq 'zh-cn'">selected</if> >简体中文</option>
+                                        <option value="zh-en" <if condition="$page_info['lang'] eq 'zh-en'">selected</if> >English</option>
+									</select>
+                           		</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[1] eq 1">
+                            <tr>
+                                <th width="100">单页标题：</th>
+                                <td><input id="title" type="text" class="input" size="60" name="info[title]" value="{jkd_$page_info.title}"/></td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[2] eq 1">
+                            <tr>
+                                <th>单页关键词：</th>
+                                <td><input type="text" class="input" size="60" name="info[keywords]" value="{jkd_$page_info.keywords}"/> 多关键词间用半角逗号（,）分开，可用于做单页关联阅读条件</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[3] eq 1">
+                            <tr>
+                                <th>单页描述：</th>
+                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[description]">{jkd_$page_info.description}</textarea> 用于SEO的description</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[4] eq 1">
+                            <tr>
+                                <th>点击量：</th>
+                                <td><input type="text" class="input" size="5" name="info[click]" value="{jkd_$page_info.click}" id='jkd_random_val'/>&nbsp;&nbsp;&nbsp;<input type='button' value='随机' id='jkd_random' style='min-width:50px;' class="btn"></td>
+                            </tr>
+                            </if>
+                            <!-- 循环单页扩展的字段 start -->
+							<volist name="menu_extend_show_list" id="jkd">
+							<tr>
+							  <th>{jkd_$jkd.form_explain}：</th>
+							  <td>
+        						  <if condition="!empty($page_info)">
+								  {jkd_:show_field($jkd["field_type"],$jkd["field_name"],$page_info[$jkd["field_name"]],$jkd["set_option"],$jkd["css"])}
+								  <else />
+								  {jkd_:show_field($jkd["field_type"],$jkd["field_name"],$jkd["default_option"],$jkd["set_option"],$jkd["css"])}
+								  </if>
+							  </td>
+							</tr>
+							</volist>
+                            <!-- 循环单页扩展的字段 end -->
+                        	<if condition="$show_default_fields_status[5] eq 1">
+                            <tr>
+                                <th>单页内容：</th>
+                                <td><textarea id="content" class="" style="height: 300px; width:80%;" name="info[content]">{jkd_$page_info['content']}</textarea></td>
+                            </tr>
+                            </if>
+                        </table>
+                        <input type='hidden' value="{jkd_$cid}" name='cid'/>
+                        <input type='hidden' value="{jkd_$cid}" name='info[cid]'/>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <if condition="empty($page_info)">
+        <input type='hidden' id='jkd_page_form_url' value="{jkd_:U('Jkd/Page/page_add', array('cid' => $cid))}" />
+        <else />
+        <input type='hidden' id='jkd_page_form_url' value="{jkd_:U('Jkd/Page/page_edit', array('cid' => $cid))}" />
+        </if>
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            UE.getEditor('content')
+        </script>
+        <script type="text/javascript">
+            $(function(){
+                $(".submit").click(function(){
+                    if($('#title').val()==''){
+                        popup.error('标题不能为空！');
+                        return false;
+                    }
+                    var url = $('#jkd_page_form_url').val();
+                    commonAjaxSubmit(url);
+                    return false;
+                });
+                //随机点击量
+                $("#jkd_random").click(function(){
+                	var other_val =  Math.floor(Math.random()*1000);
+                    $('#jkd_random_val').val(other_val);
+                }); 
+                //删除图片  123
+                $(".del_image").click(function(){
+                	$(this).siblings('.spot').css('background-image','');
+                	$(this).siblings('.spot').children('input').val('');
+               	}); 
+            });
+        </script>
+		<script type='text/javascript'>	
+		KindEditor.ready(function(K) {
+	          K.create();
+	          var editor = K.editor({
+	              allowFileManager : true,
+	              uploadJson : '__ROOT__/public/editors/kindeditor/php/upload_json.php?dirname=page',
+	              fileManagerJson:'__ROOT__/public/editors/kindeditor/php/file_manager_json.php?dirname=page'
+	              //sdl:false
+	          });
+	          K('#article_img').click(function() {
+	              editor.loadPlugin('image', function() {
+	                  editor.plugin.imageDialog({
+	                      imageUrl : K('#article_img_val').val(),
+	                      clickFn : function(url, title, width, height, border, align) {
+	                          K('#article_img_val').val(url);
+                              $('#article_img').css('background-image','url('+url+')').css('background-size','220px 160px');
+	                          editor.hideDialog();
+	                      }
+	                  });
+	              });
+	          });
+	      });
+		</script>
+    </body>
+</html>

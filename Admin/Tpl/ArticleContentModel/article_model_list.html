@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">字段管理</div>
+	                    <div style="width: 100px;float: right;">
+	                    	<button type="button" class="btn" onclick="window.location.href='{jkd_:U('Jkd/ArticleContentModel/article_model_add')}'">添加字段</button>
+	                    </div>
+                    </div>
+                    <form action='' method='post'>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                        <thead>
+                            <tr>
+                                <td>表单说明</td>
+                                <td>字段名</td>
+                                <td>字段类型</td>
+                                <td width='50'>排序</td>
+                                <td>状态</td>
+                                <td width="150">操作</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        	<foreach name='article_extend_fields_list' item='jkd'>
+                        	<tr>
+                        		<td align='center'>{jkd_$jkd.form_explain}</td>
+                        		<td align='center'>{jkd_$jkd.field_name}</td>
+                        		<td align='center'>
+                        			<if condition="$jkd['field_type'] eq 0">单行文本
+                        			<elseif condition="$jkd['field_type'] eq 1" />多行文本
+                        			<elseif condition="$jkd['field_type'] eq 2" />编辑器
+                        			<elseif condition="$jkd['field_type'] eq 3" />下拉列表
+                        			<elseif condition="$jkd['field_type'] eq 4" />radio
+                        			<elseif condition="$jkd['field_type'] eq 5" />多选列表
+                        			<elseif condition="$jkd['field_type'] eq 6" />多选按钮
+                        			<elseif condition="$jkd['field_type'] eq 7" />文件上传
+                        			</if>
+								</td>
+                        		<td align='center'><input type='text' class='input' name="sort[{jkd_$jkd.field_id}]" value="{jkd_$jkd.sort}" size='1' /></td>
+                        		<td align='center'>
+                        			<if condition="$jkd['is_show'] eq 1">显示
+                        			<else />隐藏
+                        			</if>
+                        		</td>
+                        		<td align='center'>
+                        			<a href="{jkd_:U('Jkd/ArticleContentModel/article_model_edit', array('id' => $jkd['field_id']))}" >编辑</a>&nbsp;&nbsp;|&nbsp;&nbsp;
+                        			<a link="{jkd_:U('Jkd/ArticleContentModel/article_model_del', array('field_name' => $jkd['field_name'],'id' => $jkd['field_id']))}" href="javascript:void(0)" name="{jkd_$jkd.form_explain}" class="del">删除</a>
+                        		</td>
+                        	</tr>
+                        	</foreach>
+                        </tbody>
+                        <tr>
+                        	<td align="left"><input type='button' value='提交' class='submit sub' /></td>
+                        	<td colspan="5" align="right">{jkd_$page}</td>
+                        </tr>
+                    </table>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+		<script type="text/javascript">
+		//删除栏目
+		    $(function(){
+		        $(".del").click(function(){
+		            var delLink=$(this).attr("link");
+		            $this = $(this);
+		            popup.confirm('确定删除【<b>'+$(this).attr("name")+'</b>】，确定?','温馨提示',function(action){
+		                if(action == 'ok'){
+		                    delByLink(delLink, $this);
+		                }
+		            });
+		            return false;
+		        });
+		    });
+		</script>
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

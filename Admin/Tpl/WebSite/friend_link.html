@@ -1,0 +1,107 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+		<link rel="stylesheet" href="__PUBLIC__/menu/menu.css" />
+		<script type="text/javascript" src="__PUBLIC__/menu/menu.js"></script>
+		<style type='text/css'> .input_width {width:240px;} .input_sort{width:50px;}</style>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <div class="current">友情链接</div>
+                        <div style="width: 100px;float: right;">
+	                    	<a href="{jkd_:U('Jkd/WebSite/ad_add')}" class="btn" >添加图片</a>
+	                    </div>
+                    </div>
+                    <form action="" method="post">
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_menu" style='border:none;'>
+							<tr id="jkd_target">
+								<td></th>
+								<td>显示顺序</td>
+								<td>站点名称</td>
+								<td>站点 URL</td>
+								<td>站点 LOGO</td>
+							</tr>
+							<!-- 循环友情链接  -->
+							<foreach name='friednslink_list' item='jkd'>
+								<tr>
+									<td width='50' align='center'>
+										<input type='checkbox' class='checkbox' name='delete[{jkd_$jkd.id}]' value='{jkd_$jkd.id}'>
+									</td>
+									<td>
+										<input type='text' class='input input_sort' name='sort[{jkd_$jkd.id}]' value='{jkd_$jkd.sort}'>
+									</td>
+									<td>
+										<input type='text' class='input_width input' name='name[{jkd_$jkd.id}]' value='{jkd_$jkd.name}' size='15'>
+									</td>
+									<td>
+										<input type='text' class='input_width input' name='url[{jkd_$jkd.id}]' value='{jkd_$jkd.url}'>
+									</td>
+									<td>
+										<input type='text' class='input_width input' name='logo[{jkd_$jkd.id}]' value='{jkd_$jkd.logo}'>
+									</td>
+								</tr>
+							</foreach>		
+						</table>
+						<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_menu" style='border:none'>
+							<tr>
+								<td></td>
+								<td colspan="3"><div><a href="javascript:void(0);" class="add_friendlink">添加友情链接</a></div></td>
+							</tr>
+							<tr>
+								<td width='50' align='center'>
+									<input type="checkbox" class="checkbox" id="all_checkbox" >
+									<label>删?</label>
+								</td>
+								<td>
+									<input type="button" class="btn submit" id="submit_linksubmit" name="linksubmit" title="按 Enter 键可随时提交您的修改" value="提交">
+								</td>
+							</tr>
+						</table>
+					</form>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+		<script>
+		$(function(){
+			//追加新友情链接
+			$('.add_friendlink').click(function() {
+				var tpl = "<tr><td width='50' align='center'><input type='checkbox' class='checkbox' name='delete[]' value=''></td><td><input type='text' class='input_sort input' name='add_sort[]' value='100'></td><td><input type='text' class='input_width input' name='add_name[]' value='' size='15'></td><td><input type='text' class='input_width input' name='add_url[]' value=''></td><td><input type='text' class='input_width input' name='add_logo[]' value=''></td></tr>";
+				$('#jkd_target').parent().append(tpl);
+			});
+			
+			//全选、反选
+			$('#all_checkbox').click(function() {
+				var all_now = $('#all_checkbox').attr('checked');
+				if (all_now == 'checked') {
+					$('table td .checkbox').attr('checked','true');
+				}else{
+					$('table td .checkbox').removeAttr('checked');
+				}
+			});
+	
+		})
+		</script>
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

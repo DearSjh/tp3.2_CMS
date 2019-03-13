@@ -1,0 +1,314 @@
+*{
+	padding:0;
+	margin:0;
+}
+
+a{
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+	text-decoration: none;
+}
+
+li{
+	list-style-type: none;
+}
+input,img{
+	border:none;
+}
+
+
+/*头部开始*/
+.head{
+	width:100%;
+	height:44px;
+	background: #222222;
+	border-bottom: 1px solid #080808;
+	position: fixed;
+	z-index: 1000;
+}
+.head .head_box{
+	width:1140px;
+	height:44px;
+	padding-right: 15px;
+	padding-left: 15px;
+	margin:0 auto;
+}
+.head .head_box ul.nav li{
+	float:left;
+	line-height: 20px;
+}
+.head .head_box ul.nav li a{
+	display: block;
+	font-size: 14px;
+	color:#999999;
+	padding-top: 12px;
+	padding-right: 15px;
+	padding-bottom: 12px;
+	padding-left: 15px;
+}
+.head .head_box ul.nav li a:hover{
+	color:#FFFFFF;
+}
+.head .head_box  div.right{
+	float: right;
+	padding-top: 10px;
+}
+.head .head_box  div.right a{
+	color:#999999;
+	font-size: 18px;
+	
+}
+.head .head_box  div.right a:hover{
+	color:#FFFFFF;
+}
+/*头部结束*/
+
+/*logo大盒子开始*/
+.logo{
+	background-color:#26113C;
+	background-image: linear-gradient(45deg, #020031, #6D3353);
+    background-repeat: repeat-x;
+    height: 460px;
+    left: 0;
+    min-width: 100%;
+    /*position: absolute;*/
+    text-shadow: 0 1px 3px rgba(0, 0, 0, 0.4), 0 0 30px rgba(0, 0, 0, 0.075);
+    top: 0;
+}
+.logo:after{
+	background: url("../images/bs-docs-masthead-pattern.png") repeat scroll center center rgba(0, 0, 0, 0);
+    bottom: 0;
+    content: "";
+    display: block;
+    left: 0;
+    opacity: 0.4;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+.logo .logo_box{
+	position: relative;
+	width:1140px;
+	height:460px;
+	margin:0 auto;
+
+}
+.logo .logo_box h1{
+	position: absolute;
+	left:0px;right:0px;
+    text-align: center;
+	top:100px;
+	font-weight: 700;
+	font-size: 100px;
+	color:#FFFFFF;
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+.logo .logo_box h2{
+	position: absolute;
+	top:230px;
+	left:0px;right: 0px;
+    text-align: center;
+	color:#FFFFFF;
+	font-size: 30px;
+	font-weight: 200;
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+.logo .logo_box a.one{
+	display: block;
+	position: absolute;
+	left:430px;
+	top:300px;
+	width:290px;
+	height:54px;
+	line-height: 54px;
+	text-align: center;
+	color:#FFFFFF;
+	font-size: 18px;
+	background:#428BCA;
+	box-shadow: #2A6496 0px -4px 0px 0px inset;
+	border-radius: 6px;
+	cursor: pointer;
+	z-index: 999;
+}
+.logo .logo_box .one:hover{
+	background:#3276B1;
+
+}
+.logo .logo_box a.two{
+	position: absolute;
+	top:380px;
+	left:490px;
+	color:#938A99;
+	font-size: 14px;
+	z-index: 999;
+}
+.logo .logo_box .two:hover{
+	color:#FFFFFF;
+	text-decoration: underline;
+	
+}
+/*logo大盒子结束*/
+/*新浪微博大盒子开始*/
+.sina{
+	width:100%;
+	height:71px;
+	background:#F5F5F5;
+	border-bottom: 1px solid #DDDDDD;
+}
+.sina .sina_box{
+	position: relative;
+	width:1140px;
+	height:71px;
+	margin:0 auto;
+}
+.sina .sina_box div.qq{
+	position: absolute;
+	left:390px;
+	top:20px;
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+	font-size: 16px;
+	color:#333333;
+}
+.sina .sina_box div.qq span{
+	font-size: 12px;
+	font-weight: 700;
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+	background:#5CB85C;
+	color:#FFFFFF;
+	border-radius: 3px;
+	padding-top: 2.4px;
+	padding-right: 7.2px;
+	padding-bottom: 3.6px;
+	padding-left: 7.2px;
+    margin-right: 5px;
+}
+.sina .sina_box a.sina_logo{
+	display: block;
+	position: absolute;
+	left:580px;
+	top:15px;
+	cursor: pointer;
+}
+.sina .sina_box a.sina_logo img{
+	height:30px;
+}
+/*新浪微博大盒子结束*/
+/*开源项目推荐开始*/
+.rec{
+	width:984px;
+	height:103px;
+	margin:60px auto;
+	text-align: center;
+	border-bottom:1px solid #EEEEEE;
+}
+.rec h2{
+	color:#333333;
+	font-size: 46px;
+	font-weight: 500;
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+.rec p{
+	font-size: 14px;
+	font-weight: 200;
+	color:#333333;
+	margin-bottom: 10px;
+	margin-top:5px;
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+/*开源项目推荐结束*/
+/*内容区域开始*/
+.content{
+	width:1170px;
+	height:800px;
+	margin:0 auto;
+	padding-left: 80px;
+	/*border:1px solid red;*/
+}
+
+.content .box{
+	position: relative;
+	float: left;
+	width:300px;
+	height:330px;
+	margin-right: 80px;
+	margin-top: 20px;
+
+	border:1px solid #DDDDDD;
+	border-radius: 4px;
+
+}
+.content .box a.pic{
+	display: block;
+	width:300px;
+	text-align: center;
+}
+
+.content .box a.tit{
+	position: absolute;
+	left:0px;right: 0px;
+	top:170px;
+	font-size: 24px;
+	font-weight: 500;
+	color:#468BCA;
+	text-align: center;
+}
+.content .box .tit:hover{
+	color:#2A6496;
+}
+.content .box a.tit small{
+	display: block;
+	color:#999999;
+	font-size: 15.6px;
+	margin-top: 5px;
+}
+.content .box p{
+	position: absolute;
+	display: block;
+	width:280px;
+	top:220px;
+	left: 15px;
+	text-align: center;
+	color:#555555;
+	font-size: 14px;
+	line-height: 20px;
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","Microsoft YaHei UI","Microsoft YaHei","WenQuanYi Micro Hei",sans-serif;
+}
+/*内容区域结束*/
+/*页脚开始*/
+.footer{
+	width:100%;
+	height:100px;
+	background:#F5F5F5;
+	border-top:1px solid #E5E5E5;
+	padding-top:30px;
+	padding-bottom: 30px;
+	text-align: center;
+	line-height: 20px;
+}
+.footer p{
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;
+	font-size: 14px;
+	color:#999999;
+	margin-bottom: 10px;
+}
+.footer p a{
+	font-family:"ff-tisa-web-pro-1","ff-tisa-web-pro-2","Lucida Grande","Helvetica Neue",Helvetica,Arial,"Hiragino Sans GB","Hiragino Sans GB W3","WenQuanYi Micro Hei",sans-serif;
+	font-size: 14px;
+	color:#428BCA;
+}
+.footer p a:hover{
+	text-decoration: underline;
+}
+/*页脚结束*/
+/*返回顶部开始*/
+.back_top{
+	display: none;
+	width:38px;
+	height:38px;
+	position: fixed;
+	bottom:20px;
+	right:20px;
+	_position:absolute;
+	_right:20px;
+	_top:expression(document.documentElement.scrollTop + document.documentElement.clientHeight-this.offsetHeight-20);
+}
+/*返回顶部结束*/

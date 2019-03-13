@@ -1,0 +1,75 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">系统信息</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                       	<tr>                                
+                       		<td align="left" colspan='4'>
+		                    	<div class="jkd_info_t">您好，<php>echo $_SESSION['jkd_uname']</php></div>  
+                       			<span class='margin30'></span>&nbsp;&nbsp;&nbsp;
+                       			您的上一次登录时间是：<php>echo $_SESSION['jkd_logintime']</php><span class='margin30'>&nbsp;&nbsp;</span>
+								您本次的登录时间是：<php>echo date('Y-m-d H:i');</php>	<span class='margin30'>&nbsp;&nbsp;</span>
+								您的上一次登录IP是：<php>echo $_SESSION['jkd_loginip']</php><span class='margin30'>&nbsp;&nbsp;</span>
+								您的本次登录IP是：<php>echo get_client_ip();</php><span class='margin30'>&nbsp;&nbsp;</span>
+                       		</td>
+                    	</tr>
+					</table>
+					<!-- 官方动态加载 -->
+					<iframe src="" style='float:left;width:654px;height:265px;margin-top:15px;border:none;'></iframe>
+					<!-- 官方动态加载  -->
+                    <table style='float:left;margin-left:10px;' width="44%" border="0" cellspacing="0" cellpadding="0" class="tab" style='margin-top:0px;'>
+                       	<tr>                            
+                       		<td align="left" colspan='4'>
+		                    	<div class="jkd_info_t">其他信息☑</div>  
+		                    	<table class='jkd_table'>
+									<tr>
+										<td>xxxx! CMS 程序版本</td>
+										<td>xxxx! CMS xxxx beta xxxxx&nbsp;&nbsp;&nbsp;&nbsp; </td>
+									</tr>
+									<tr>
+										<td>操作系统：</td>
+										<td>{jkd_$server_info.a}</td>
+									</tr>
+									<tr>
+										<td>主机名IP端口：</td>
+										<td>{jkd_$server_info.b}</td>
+									</tr>
+									<tr>
+										<td>运行环境：</td>
+										<td>{jkd_$server_info.c}</td>
+									</tr>
+									<tr>
+										<td>上传附件限制：</td>
+										<td>{jkd_$server_info.d}</td>
+									</tr>
+								</table>
+                			</td>
+                    	</tr>
+					</table>
+					<!-- 官方开发团队 -->
+					<iframe src="hxxxxxxxxxxxxxxx" style='float:left;width:100%;height:215px;border:none;'></iframe>
+					<!-- 官方开发团队 -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+    </body>
+</html>

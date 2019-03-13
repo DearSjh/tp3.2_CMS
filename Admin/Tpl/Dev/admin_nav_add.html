@@ -1,0 +1,85 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item">
+	                        <div class="current">添加导航</div>
+	                    </div>
+	                    <form action="" method="post">
+	                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+	                            <tr>
+	                                <th width="120">所属类型：</th>
+	                                <td>
+										<select name="nav_type" >
+											<option value="1" <if condition="$admin_nav_list['nav_type'] eq 1">selected='selected'</if>>左侧导航（常规操作）</option>
+											<option value="2" <if condition="$admin_nav_list['nav_type'] eq 2">selected='selected'</if>>头部导航</option>
+										</select>					
+									</td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">导航名：</th>
+	                                <td><input name="nav_name" type="text" class="input" size="40" value="{jkd_$admin_nav_list.nav_name}" /></td>
+	                            	<td></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">跳转地址：</th>
+	                                <td><input name="nav_url" type="text" class="input" size="80" value="{jkd_$admin_nav_list.nav_url}" /></td>
+	                            	<td></td>
+	                            </tr>
+	                            <tr>
+	                                <th>排序：</th>
+	                                <td><input class="input" name="sort" type="text" size="40" value="{jkd_$admin_nav_list.sort}" /></td>
+	                            	<td></td>
+	                            </tr>
+	                            <tr>
+	                                <th>状态：</th>
+	                                <td>
+										<select name="is_show" >
+											<option value="1" <if condition="$admin_nav_list['is_show'] eq 1">selected='selected'</if>>显示</option>
+											<option value="0" <if condition="$admin_nav_list['is_show'] eq 0">selected='selected'</if>>隐藏</option>
+										</select>		
+									</td>
+	                            	<td></td>
+	                            </tr>
+	                        </table>
+	                        <input type='hidden' name="id" value="{jkd_$admin_nav_list.id}" />
+	                    </form>
+	                    <div class="commonBtnArea" >
+	                        <button class="btn submit">提交</button>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        $(function(){
+        	
+		    $(".submit").click(function(){
+		    	//导航名
+		    	if($('#nav_name').val()==''){
+                    popup.error('导航名称不为空！');
+                    return false;
+                }
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

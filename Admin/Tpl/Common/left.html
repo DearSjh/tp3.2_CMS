@@ -1,0 +1,51 @@
+<div id="Left">
+	<div id="control" class=""></div>
+	<div class="subMenuList">
+		<div class="itemTitle">
+			<if condition="MODULE_NAME eq 'Index'">常用操作<else/>子菜单</if>
+		</div>
+		<ul>
+			<if condition="MODULE_NAME eq 'Index'">
+				<!-- 管理首页 start -->
+				<php>$admin_left_nav_list = admin_left_nav();</php>
+				<foreach name="admin_left_nav_list" item='jkd'>
+				<li><a href="{jkd_$jkd.nav_url}">{jkd_$jkd.nav_name}</a></li>
+				</foreach>
+				<!-- 管理首页 end -->
+			<elseif condition="MODULE_NAME eq 'Global'"/>			
+				<!-- 全局管理 start -->	
+				<li><a href="{jkd_:U('Global/site_conf')}" <if condition="ACTION_NAME eq 'site_conf'">class='current'</if>>站点配置</a></li>
+				<li><a href="{jkd_:U('Global/safety_conf')}" <if condition="ACTION_NAME eq 'safety_conf'">class='current'</if>>安全配置</a></li>
+				<li><a href="{jkd_:U('Global/go_admin')}" <if condition="ACTION_NAME eq 'go_admin'">class='current'</if>>后台入口管理</a></li>
+				<li><a href="{jkd_:U('Global/system_conf')}" <if condition="ACTION_NAME eq 'system_conf'">class='current'</if>>系统配置</a></li>
+				<!-- 全局管理 end -->
+			<elseif condition="MODULE_NAME eq 'Menu'"/>			
+				<!-- 栏目管理 start -->	
+				<li><a href="{jkd_:U('Menu/menu_list')}" <if condition="ACTION_NAME eq 'menu_list' or ACTION_NAME eq 'menu_edit'">class='current'</if>>栏目列表</a></li>
+				<!-- 栏目管理 end -->
+			<elseif condition="MODULE_NAME eq 'Dev' or MODULE_NAME eq 'ArticleContentModel' or MODULE_NAME eq 'ProductContentModel' or MODULE_NAME eq 'PageContentModel'" />			
+				<!-- 开发者模式 start -->
+				<li><a href="{jkd_:U('Dev/contentModel')}" <if condition="ACTION_NAME eq 'contentModel' or MODULE_NAME eq 'ArticleContentModel' or MODULE_NAME eq 'ProductContentModel' or MODULE_NAME eq 'PageContentModel'">class='current'</if>>内容模型管理</a></li>
+				<li><a href="{jkd_:U('Dev/admin_nav')}" <if condition="ACTION_NAME eq 'admin_nav' or ACTION_NAME eq 'admin_nav_list'">class='current'</if>>后台导航管理</a></li>
+				<!-- 开发者模式 end -->
+			<elseif condition="MODULE_NAME eq 'WebSite'" />	
+				<!-- 网站功能 start -->
+				<li><a href="{jkd_:U('WebSite/banner_list')}" <if condition="ACTION_NAME eq 'banner_list' or ACTION_NAME eq 'banner_add' or ACTION_NAME eq 'banner_menu'">class='current'</if>>轮播管理</a></li>
+				<li><a href="{jkd_:U('WebSite/ad_list')}" <if condition="ACTION_NAME eq 'ad_list' or ACTION_NAME eq 'ad_add'">class='current'</if>>广告管理</a></li>
+				<li><a href="{jkd_:U('WebSite/tag_list')}" <if condition="ACTION_NAME eq 'tag_list' or ACTION_NAME eq 'tag_add'">class='current'</if>>标签管理</a></li>
+				<li><a href="{jkd_:U('WebSite/file_manage')}" <if condition="ACTION_NAME eq 'file_manage'">class='current'</if>>附件管理</a></li> 
+				<li><a href="{jkd_:U('WebSite/friend_link')}" <if condition="ACTION_NAME eq 'friend_link'">class='current'</if>>友情链接</a></li>
+				<li><a href="{jkd_:U('WebSite/message')}" <if condition="ACTION_NAME eq 'message'">class='current'</if>>留言信息</a></li>
+				<!-- 网站功能 end -->
+			<elseif condition="MODULE_NAME eq 'TplCenter'" />	
+				<!-- 模板管理 start -->
+				<li><a href="{jkd_:U('TplCenter/index')}" <if condition="MODULE_NAME eq 'TplCenter'">class='current'</if>>模板列表</a></li>
+				<!-- 模板管理 end -->
+			<elseif condition="MODULE_NAME eq 'Database'" />	
+				<!-- 数据管理 start -->
+				<li><a href="{jkd_:U('Database/database_list')}" <if condition="ACTION_NAME eq 'database_list'">class='current'</if>>数据库备份</a></li>
+				<!-- 数据管理 end -->
+			</if>
+		</ul>
+	</div>
+</div>

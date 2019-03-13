@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+		<link rel="stylesheet" href="__PUBLIC__/menu/menu.css" />
+		<script type="text/javascript" src="__PUBLIC__/menu/menu.js"></script>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item hr">
+	                        <div class="current">轮播分类</div>
+	                    </div>
+	                    <div id='menu_open' >
+							<a href="javascript:void(0);" class="all_open" style="margin-left:60px;color:#2366A8;">全部展开</a>&nbsp;|&nbsp;<a href="javascript:void(0);" class="all_close" style="color:#2366A8;">全部折叠</a>
+						</div>
+						<form action="" method="post">
+							<table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab_menu">
+								<thead>
+									<tr pid="0">
+										<td class='open_close'></td>
+										<td class='show_sort'>显示顺序</td>
+										<td class='menu_name'>分类名称</td>
+										<td class='menu_other'>操作</td>
+									</tr>
+								</thead>
+								<tbody>
+								
+								<foreach name="menu_list" item="menu_one">
+								<!--  顶级分类  start-->
+									<tr id="{jkd_$menu_one.id}" pid="0">
+										<td class='open_close'><a href="javascript:void(0);" now_status='1' class="menu_open">[-]</a></td>
+										<!-- 显示顺序   -->
+										<td class='show_sort'><input type="text" class="show_order_input input" value="{jkd_$menu_one.sort}" name="sort[{jkd_$menu_one.id}]"></td>
+										<td class='menu_name'>
+											<div class="menu_one">
+												<!-- 分类名称  -->
+												<input type="text" class="nav_name_input input" value="{jkd_$menu_one.menu_name}" name="name[{jkd_$menu_one.id}]">
+												<!-- 分类ID -->
+												<a href="javascript:void(0);" onclick="add_two_menu({jkd_$menu_one.id});" class="add_two_menu">添加子分类</a>						
+											</div>
+										</td>
+										<td class='menu_other'>
+											<!-- 分类ID  -->
+											<a link="{jkd_:U('Jkd/WebSite/del',array('id'=>$menu_one['id']))}" href="javascript:void(0)" name="{jkd_$menu_one.menu_name}" class="del">删除</a>					
+										</td>
+									</tr>
+									<!--  顶级分类  end-->
+								
+									<foreach name="menu_one['child']" item='menu_two'>
+									<!--  二级分类  start-->
+									<tr id="{jkd_$menu_two.id}" name="father_is_hidden_show_{jkd_$menu_one.id}">
+										<td class='open_close'></td>
+										<!-- 显示顺序   -->
+										<td class='show_sort'>
+											<input type="text" class="show_order_input input" value="{jkd_$menu_two.sort}" name="sort[{jkd_$menu_two.id}]">
+										</td>
+										<td class='menu_name'>
+											<div class="menu_two">
+												<!-- 分类名称  -->
+												<input type="text" class="nav_name_input input" value="{jkd_$menu_two.menu_name}" name="name[{jkd_$menu_two.id}]">
+												<!-- 分类ID -->
+												<a href="javascript:void(0);" onclick="add_three_menu({jkd_$menu_two.id});" class="add_three_menu">添加子分类</a>						</div>
+										</td>
+										<td class='menu_other'>
+											<!-- 分类ID  -->
+											<a link="{jkd_:U('Jkd/WebSite/del',array('id'=>$menu_two['id']))}" href="javascript:void(0)" name="{jkd_$menu_two.menu_name}" class="del">删除</a>					
+										</td>
+									</tr>
+									<!--  二级分类  end-->
+								
+									<foreach name="menu_two['child']" item='menu_three'>
+									<!--  三级分类   start-->
+									<tr id="{jkd_$menu_three.id}" name="father_is_hidden_show_{jkd_$menu_one.id}">
+										<td class='open_close'></td>
+										<!-- 显示顺序   -->
+										<td class='show_sort'><input type="text" class="show_order_input input" value="{jkd_$menu_three.sort}" name="sort[{jkd_$menu_three.id}]"></td>
+										<td class='menu_name'>
+											<div class="menu_three">
+												<!-- 分类名称  -->
+												<input type="text" class="nav_name_input input" value="{jkd_$menu_three.menu_name}" name="name[{jkd_$menu_three.id}]">
+												<!-- 分类ID  -->
+												<a href="javascript:void(0);" onclick="add_four_menu({jkd_$menu_three.id});" class="add_four_menu">添加子分类</a>						</div>
+										</td>
+										<td class='menu_other'>
+											<!-- 分类ID  -->
+											<a link="{jkd_:U('Jkd/WebSite/del',array('id'=>$menu_three['id']))}" href="javascript:void(0)" name="{jkd_$menu_three.menu_name}" class="del">删除</a>					
+										</td>
+									</tr>
+									<!--  三级分类  end-->
+									
+									<volist name="menu_three['child']" id="menu_four">
+									<!--  四级菜单 start-->
+									<tr id="{jkd_$menu_four.id}" name="father_is_hidden_show_{jkd_$menu_one.id}">
+										<td class='open_close'></td>
+										<!-- 显示顺序   -->
+										<td class='show_sort'>
+											<input type="text" class="show_order_input input" value="{jkd_$menu_four.sort}" name="sort[{jkd_$menu_four.id}]">
+										</td>
+										<td class='menu_name'>
+											<div class="menu_four">
+											<!-- 菜单名称  -->
+												<input type="text" class="nav_name_input input" value="{jkd_$menu_four.menu_name}" name="name[{jkd_$menu_four.id}]">
+											</div>
+										</td>
+										<td class='menu_other'>
+											<!-- 菜单ID  -->
+											<a link="{jkd_:U('Jkd/WebSite/del',array('id'=>$menu_four['id']))}" href="javascript:void(0)" name="{jkd_$menu_four.menu_name}" class="del">删除</a>						
+										</td>
+									</tr>
+									<!--  四级菜单 end-->
+									
+									</volist><!-- 四级菜单循环并结束判断  end  -->
+									</foreach><!-- 三级菜单循环并结束判断  end  -->
+									</foreach><!-- 二级菜单循环并结束判断  end  -->
+									</foreach><!-- 顶级菜单循环 end  -->
+				
+									<tr pid="0">
+										<td class='open_close'></td>
+										<td class='show_sort'></td>
+										<td class='menu_name'><a href="javascript:void(0);" class="add_top_menu">新分类名称</a></td>	
+										<td class='menu_other'></td>
+									</tr>
+								</tbody>
+							</table>
+						</form>
+	                    <div class="commonBtnArea" >
+	                        <button class="btn submit">提交</button>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+		//更新分类
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+		<script type="text/javascript">
+		//删除分类
+		    $(function(){
+		        $(".del").click(function(){
+		            var delLink=$(this).attr("link");
+		            $this = $(this);
+		            popup.confirm('删除的分类必须无子分类，且无数据！确定删除【<b>'+$(this).attr("name")+'</b>】吗?','温馨提示',function(action){
+		                if(action == 'ok'){
+		                    delByLink(delLink, $this);
+		                }
+		            });
+		            return false;
+		        });
+		    });
+		</script>
+    </body>
+</html>

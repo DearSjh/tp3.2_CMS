@@ -1,0 +1,1 @@
+<?php $developer = array( 'is_mobile' => 1, 'is_debug' => 1 ) ?>

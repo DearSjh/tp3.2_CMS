@@ -1,0 +1,209 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    	<!-- 初始化百度编辑器  -->
+    	<js href="__ROOT__/public/editors/ueditor/ueditor.config.js,__ROOT__/public/editors/ueditor/ueditor.all.min.js"/>
+		<css href="__PUBLIC__/css/img_about.css"/>
+        <!-- kindeditor -->
+        <script src="__ROOT__/public/editors/kindeditor/kindeditor.js"></script>
+		<script src="__ROOT__/public/editors/kindeditor/lang/zh_CN.js"></script>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <div class="current">添加编辑新闻</div>
+                    </div>
+                    <form action='' method='post'>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        	<if condition="$show_default_fields_status[0] eq 1">
+                            <tr>
+                                <th>语言选择：</th>
+                                <td>
+                                    <select name="info[lang]">
+                                        <option value="zh-cn" <if condition="$article_info['lang'] eq 'zh-cn'">selected</if> >简体中文</option>
+                                        <option value="zh-en" <if condition="$article_info['lang'] eq 'zh-en'">selected</if> >English</option>
+									</select>
+                           		</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[1] eq 1">
+                            <tr>
+                                <th width="100">文章标题：</th>
+                                <td><input id="title" type="text" class="input" size="60" name="info[title]" value="{jkd_$article_info.title}"/></td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[2] eq 1">
+                            <tr>
+                                <th width="100">文章发布状态：</th>
+                                <td>
+                                	<label><input type="radio" name="info[status]" value="1" <if condition="$article_info.status eq 1"> checked="checked"</if> /> 文章已发布状态</label>
+                                    &nbsp;<label><input type="radio" name="info[status]" value="0" <if condition="$article_info.status eq 0"> checked="checked"</if> /> 文章审核状态</label>
+								</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[3] eq 1">
+                            <tr>
+                                <th>文章所属分类：</th>
+                                <td>
+                                    <select name="info[cid]" class='type_change'>
+										<if condition="get_action_name() eq 'article_add'" >
+	                                        <volist name="menu_list" id="jkd">
+	                                            <if condition="$jkd['id'] eq $cid">
+	                                            <option value="{jkd_$jkd.id}" selected="selected">{jkd_$jkd.menu_name}</option>
+	                                            <else/>
+	                                            <option value="{jkd_$jkd.id}">{jkd_$jkd.menu_name}</option>
+	                                            </if>
+	                                        </volist>
+				                        <else />
+	                                        <volist name="menu_list" id="jkd">
+	                                            <if condition="$jkd['id'] eq $article_info['cid']">
+	                                            <option value="{jkd_$jkd.id}" selected="selected">{jkd_$jkd.menu_name}</option>
+	                                            <else/>
+	                                            <option value="{jkd_$jkd.id}">{jkd_$jkd.menu_name}</option>
+	                                            </if>
+	                                        </volist>
+				                        </if>
+                                    </select>
+                            	</td>
+                            </tr>
+                            </if>
+                            <if condition="$show_default_fields_status[4] eq 1">
+                            <tr>
+                                <th>文章图片：</th>
+                                <td>
+                                	<div class="instructions del_image">删除</div>
+                                    <div class="droparea spot" id="article_img" style="background-image: url({jkd_$article_info.img}); cursor:pointer;background-size: 220px 160px;">
+	                                    <input type="hidden" name="info[img]" id="article_img_val" value="{jkd_$article_info.img}">
+                                    </div>
+                            	</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[5] eq 1">
+                            <tr>
+                                <th>文章关键词：</th>
+                                <td><input type="text" class="input" size="60" name="info[keywords]" value="{jkd_$article_info.keywords}"/> 多关键词间用半角逗号（,）分开，可用于做文章关联阅读条件</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[6] eq 1">
+                            <tr>
+                                <th>文章描述：</th>
+                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[description]">{jkd_$article_info.description}</textarea> 用于SEO的description</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[7] eq 1">
+                            <tr>
+                                <th>文章摘要：</th>
+                                <td><textarea class="input" style="height: 60px; width: 600px;" name="info[summary]">{jkd_$article_info.summary}</textarea> 如果不填写则系统自动截取文章前200个字符</td>
+                            </tr>
+                            </if>
+                        	<if condition="$show_default_fields_status[8] eq 1">
+                            <tr>
+                                <th>点击量：</th>
+                                <td><input type="text" class="input" size="5" name="info[click]" value="{jkd_$article_info.click}" id='jkd_random_val'/>&nbsp;&nbsp;&nbsp;<input type='button' value='随机' id='jkd_random' style='min-width:50px;' class="btn"></td>
+                            </tr>
+                            </if>
+                            <!-- 循环文章扩展的字段 start -->
+							<volist name="menu_extend_show_list" id="jkd">
+							<tr>
+							  <th>{jkd_$jkd.form_explain}：</th>
+							  <td>
+								  <if condition="get_action_name() eq 'article_edit'" >
+								  {jkd_:show_field($jkd["field_type"],$jkd["field_name"],$article_info[$jkd["field_name"]],$jkd["set_option"],$jkd["css"])}
+								  <else />
+								  {jkd_:show_field($jkd["field_type"],$jkd["field_name"],$jkd["default_option"],$jkd["set_option"],$jkd["css"])}
+								  </if>
+							  </td>
+							</tr>
+							</volist>
+                            <!-- 循环文章扩展的字段 end -->
+                        	<if condition="$show_default_fields_status[9] eq 1">
+                            <tr>
+                                <th>文章内容：</th>
+                                <td><textarea id="content" class="" style="height: 300px; width:80%;" name="info[content]">{jkd_$article_info['content']}</textarea></td>
+                            </tr>
+                            </if>
+                        </table>
+						<if condition="get_action_name() eq 'article_edit'" >
+                        <input type="hidden" name="aid" value="{jkd_$aid}" />
+                        </if>
+                        <input type='hidden' value="{jkd_$cid}" name='cid'/>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <input type='hidden' value="<php>echo get_action_name();</php>" id='get_action_name' />
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            UE.getEditor('content')
+        </script>
+        <script type="text/javascript">
+            $(function(){
+                $(".submit").click(function(){
+                    if($('#title').val()==''){
+                        popup.error('标题不能为空！');
+                        return false;
+                    }
+                    commonAjaxSubmit("");
+                    return false;
+                });
+                //切换跳转
+                $('.type_change').change(function(){
+                	var now_cid = $(this).val();
+                	var get_action_name = $('#get_action_name').val();
+                	if(get_action_name == 'article_add'){
+                    	window.location.href = "__URL__/article_add/cid/"+now_cid;
+                	}
+                });
+                //随机点击量
+                $("#jkd_random").click(function(){
+                	var other_val =  Math.floor(Math.random()*1000);
+                    $('#jkd_random_val').val(other_val);
+                }); 
+                //删除图片  
+                $(".del_image").click(function(){
+                	$(this).siblings('.spot').css('background-image','');
+                	$(this).siblings('.spot').children('input').val('');
+               	}); 
+            });
+        </script>
+		<script type='text/javascript'>	
+		KindEditor.ready(function(K) {
+	          K.create();
+	          var editor = K.editor({
+	              allowFileManager : true,
+	              uploadJson : '__ROOT__/public/editors/kindeditor/php/upload_json.php?dirname=article',
+	              fileManagerJson:'__ROOT__/public/editors/kindeditor/php/file_manager_json.php?dirname=article'
+	              //sdl:false
+	          });
+	          K('#article_img').click(function() {
+	              editor.loadPlugin('image', function() {
+	                  editor.plugin.imageDialog({
+	                      imageUrl : K('#article_img_val').val(),
+	                      clickFn : function(url, title, width, height, border, align) {
+	                          K('#article_img_val').val(url);
+                              $('#article_img').css('background-image','url('+url+')').css('background-size','220px 160px');
+	                          editor.hideDialog();
+	                      }
+	                  });
+	              });
+	          });
+	      });
+		</script>
+    </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item hr">
+	                        <div class="current">安全配置</div>
+	                    </div>
+	                    <form action="" method="post">
+	                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+	                            <tr>
+	                                <th width="120">新的用户名：</th>
+	                                <td><input name="site_url" type="text" class="input" size="40" value="" /></td>
+	                            	<td>新的用户名，下次登陆后台时、输入的用户名（留空将保留原用户名）</td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">新的密码：</th>
+	                                <td><input name="password" type="text" class="input" size="40" value="" /></td>
+	                            	<td></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">确认密码：</th>
+	                                <td><input name="cfm_password" type="text" class="input" size="40" value="" /></td>
+	                            	<td>新的密码，下次登陆后台时、输入的密码</td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">请选择安全提问：</th>
+	                                <td>
+	                                	<select name='question_id'>
+											<option value='1'>母亲的名字</option>
+											<option value='2'>爷爷的名字</option>
+											<option value='3'>父亲出生的城市</option>
+											<option value='4'>您其中一位老师的名字</option>
+											<option value='5'>您个人计算机的型号</option>
+											<option value='6'>您最喜欢的餐馆名称</option>
+	                                	</select>
+	                                </td>
+	                            	<td><span class='jkd_introduce'></span></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">请输入安全问题：</th>
+	                                <td><input name="question_answer" type="text" class="input" size="40" value="" /></td>
+	                            	<td><span class='jkd_introduce'></span></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">口令：</th>
+	                                <td><input name="pwd_command" type="text" class="input" size="40" value="" /></td>
+	                            	<td><span class='jkd_introduce'>修改账户密码关键验证条件、如有遗忘请联系开发商</span></td>
+	                            </tr>
+	                        </table>
+	                    </form>
+	                    <div class="commonBtnArea" >
+	                        <button class="btn submit">提交</button>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

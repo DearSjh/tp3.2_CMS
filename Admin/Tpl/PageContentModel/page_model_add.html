@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item">
+	                        <div class="current">添加扩展字段</div>
+	                    </div>
+	                    <form action="" method="post">
+	                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+	                            <tr>
+	                                <th width="120">字段类型：</th>
+	                                <td>
+										<select id="field_type" name="field_type" style="width:258px" onChange="if(this.value>2 && this.value <7){ $('#set_option').show();$('#zy_php').hide();  } else{ $('#set_option').hide();$('#zy_php').show(); }">
+											<option value="">请选择</option>
+											<volist name='list_type' id='vo' key='k'>
+											<option value="{jkd_$k-1}" <if condition="$page_extend_fields_info['field_type'] eq ($k - 1)">selected='selected'</if>>{jkd_$vo}</option>
+											</volist>
+										</select>					
+									</td>
+	                            	<td>
+	                            		<span class='jkd_introduce'><a href='javascript:void(0);' id='shuoming'>说明</a></span>
+	                            	</td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">表单显示文本：</th>
+	                                <td><input name="form_explain" type="text" class="input" size="40" value="{jkd_$page_extend_fields_info.form_explain}" /></td>
+	                            	<td><span class='jkd_introduce'>例如:姓名</span></td>
+	                            </tr>
+	                            <tr>
+	                                <th width="120">字段名称：</th>
+	                                <td><input name="field_name" id='field_name' type="text" class="input" size="40" value="{jkd_$page_extend_fields_info.field_name}" /></td>
+	                            	<td><span class='jkd_introduce'>例如:name（注：英文）</span></td>
+	                            </tr>
+	                            <tr id="set_option" <if condition="$page_extend_fields_info['field_type'] eq 3 or $page_extend_fields_info['field_type'] eq 4 or $page_extend_fields_info['field_type'] eq 5 or $page_extend_fields_info['field_type'] eq 6"><else />style="display:none;"</if>>
+								  <th width="120">预设选项</th>
+								  <td width='258'><textarea name="set_option" style="width:258px; height:115px;">{jkd_$page_extend_fields_info.set_option}</textarea></td>
+								  <td><span class='jkd_introduce'>多个选项之间用<font color='red'>(,)</font>逗号，每个选项以|分隔 <font color='red'>显示文本|值 </font><br>如果显示文本等于值就直接 写显示文本<br>例如:<br>张三|3,李四|4 </span></td>
+								</tr>
+	                            <tr>
+	                                <th>预设默认值：</th>
+	                                <td width="258"><input class="input" name="default_option" type="text" size="40" value="{jkd_$page_extend_fields_info.default_option}" /></td>
+	                            	<td><span class='jkd_introduce'>例如:name字段默认值：李刚 默认可以为空</span></td>
+	                            </tr>
+	                            <tr>
+	                                <th>附加CSS：</th>
+	                                <td width="258">
+	                                	<textarea name="css" cols="40" rows="2" style="height:85px;">{jkd_:remove_str_other($page_extend_fields_info['css'])}</textarea>
+	                                </td>
+	                           	 	<td><span class='jkd_introduce'>例如：style='width:350px; height:30px'class='red'</span></td>
+	                            </tr>
+	                            <tr>
+	                                <th>排序：</th>
+	                                <td><input class="input" name="sort" type="text" size="40" value="{jkd_$page_extend_fields_info.sort}" /></td>
+	                            	<td></td>
+	                            </tr>
+	                            <tr>
+	                                <th>状态：</th>
+	                                <td>
+										<select name="is_show" >
+											<option value="1" <if condition="!empty($id) and $page_extend_fields_info['is_show'] eq 1">selected='selected'</if>>显示</option>
+											<option value="0" <if condition="!empty($id) and $page_extend_fields_info['is_show'] eq 0">selected='selected'</if>>隐藏</option>
+										</select>		
+									</td>
+	                            	<td></td>
+	                            </tr>
+	                        </table>
+	                        <input type='hidden' name="id" value="{jkd_$id}" />
+	                    </form>
+	                    <div class="commonBtnArea" >
+	                        <button class="btn submit">提交</button>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        $(function(){
+        	//字段类型说明
+        	$('#shuoming').click(function(){
+                popup.warning('<br />0=单行文本(text)__varchar(255)<br />1=多行文本不支持编辑器(textarea)__text<br />2=多行文本支持编辑器(htmleditor)__text<br />3=下拉列表菜单(select)__tinyint(1)<br />4=单选按钮(radio)__tinyint(1)<br />5=多选列表(multselect)__varchar(255)<br />6=多选按钮(checkbox)__varchar(255)<br />7=文件上传(file)__varchar(255)');
+                return false;
+        	});
+        	
+		    $(".submit").click(function(){
+		    	//字段类型
+		    	if($('#field_type').val()==''){
+                    popup.error('字段类型不能为空，请选择字段类型！');
+                    return false;
+                }
+		    	//字段名
+		    	if($('#field_name').val()==''){
+                    popup.error('字段名不能为空');
+                    return false;
+		    	}
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

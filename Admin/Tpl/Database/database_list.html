@@ -1,0 +1,94 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <span class="fr">数据库中共有{jkd_$table_count}张表，共计{jkd_$table_total}</span>
+                        <div class="current">数据库表结构列表</div>
+                    </div>
+                    <form>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                            <thead>
+                                <tr>
+                                   <!--  <td width="90"><label><input name="" class="chooseAll" type="checkbox"/> 全选</label> <label><input name="" class="unsetAll" type="checkbox"/> 反选</label></td> -->
+                                    <td>表名</td>
+                                    <td>表用途</td>
+                                    <td>记录行数</td>
+                                    <td>引擎类型</td>
+                                    <td>字符集</td>
+                                    <td>表大小</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <volist name="table_list" id="jkd">
+                                    <tr align="center">
+                                        <!-- <td><input type="checkbox" name="table[]" value="{jkd_$jkd.Name}"/></td> -->
+                                        <td align="left">{jkd_$jkd.Name}</td>
+                                        <td>{jkd_$jkd.Comment}</td>
+                                        <td>{jkd_$jkd.Rows}</td>
+                                        <td>{jkd_$jkd.Engine}</td>
+                                        <td>{jkd_$jkd.Collation}</td>
+                                        <td>{jkd_$jkd.size}</td>
+                                    </tr>
+                                </volist>
+                            </tbody>
+                            <tfoot align="center">
+                                <tr>
+                                    <!-- <td width="90">
+                                    	<label><input name="" class="chooseAll" type="checkbox"/> 全选</label> <label>
+                                    	<input name="" class="unsetAll" type="checkbox"/> 反选</label></td> -->
+                                    <td>表名</td>
+                                    <td>表用途</td>
+                                    <td>记录行数</td>
+                                    <td>引擎类型</td>
+                                    <td>字符集</td>
+                                    <td>总计：{jkd_$table_total}</td>
+                                </tr>
+                            </tfoot>
+                        </table>
+                    </form><!--  
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">备份所选</button>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                clickCheckbox();
+                $(".submit").click(function(){
+                    if($("tbody input[type='checkbox']:checked").size()==0){
+                        popup.alert("请先选择你要备份的数据库表吧");
+                        return false;
+                    }
+                    if($(this).attr("disabledSubmit")){
+                        popup.alert("已提交，系统在处理中...");
+                    }else{
+                        $(this).attr("disabledSubmit",true).html("提交处理中...");
+                        commonAjaxSubmit("__URL__/backup");
+//                        popup.alert("系统处理中，如果数据库中数据较多可能需要较长时间，请稍候....");
+                        setTimeout(function(){
+                            popup.close("asyncbox_alert");
+                        },2000);
+                    }
+                });
+            });
+        </script>
+    </body>
+</html>

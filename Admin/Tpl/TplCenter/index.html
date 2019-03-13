@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    	<style>
+			table #tr td {padding:0;}
+			.dir_explain {border-right: #000000 2px solid; border-top: #ffffff 2px solid; border-left: #ffffff 2px solid; cursor: default; border-bottom: #999999 2px solid; background-color: #EDEDED;font-weight:bold;text-align:center;}
+		</style>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item hr">
+	                        <div class="current">模板管理</div>
+	                    </div>
+	                    <div class="main_center">
+							<table width="100%" border="0"  align=center cellpadding="3" cellspacing="2" class="table1 table-bordered">
+								<tr bgcolor="#f1f3f5" style="font-weight:bold;" id='tr'>
+								    <td width="30%" align="center" class="dir_explain">文件夹/文件名</td>
+									<td width="20%" align="center" class="dir_explain">文件类型</td>
+									<td width="10%" align="center" class="dir_explain">文件大小</td>
+									<td width="20%" align="center" class="dir_explain">修改时间</td>
+									<td width="20%" align="center" class="dir_explain">相关操作</td>
+								</tr>
+								<notempty name="dirlast"> 
+								<if condition="$dirpath neq './Home/Tpl'">
+								<tr bgcolor="#f1f3f5" style="font-weight:bold;">
+									<td colspan="5" align="left">
+										<img src="__PUBLIC__/tplcenter/file/last.gif"> 
+										<a href="__URL__/index/id/{jkd_$dirlast}" >上级目录</a> 当前目录: {jkd_$dirpath}
+									</td>
+								</tr>
+								</if>
+								</notempty>
+								<volist name="list_dir" id="vo">
+								<eq name="vo.isDir" value="1">
+								<tr>
+								 	<td width="30%">
+								 		<img src="__PUBLIC__/tplcenter/file/folder.gif" width="16" height="16">
+								 		<a href="__URL__/index/id/{jkd_:str_replace('\.', '' , $vo['pathfile'])}"> {jkd_$vo.filename}</a>
+								 	</td>
+								    <td width="20%">文件夹</td>
+								    <td width="10%">{jkd_:byte_format(getdirsize($vo['path'].'/'.$vo['filename']))}</td>
+								    <td width="20%">{jkd_$vo.mtime|getcolordate='Y-m-d H:i:s',###}</td>
+								    <td width="20%"><a href="__URL__/index/id/{jkd_:str_replace('\.', '' , $vo['pathfile'])}">查看目录</a></td>
+								</tr>
+								<else />
+								<tr>
+								 	<in name="vo.ext" value="jpg,gif,js,css,html,htm,php">
+								   	<td>
+								   		<img src="__PUBLIC__/tplcenter/file/{jkd_$vo.ext}.gif" width="16" height="16"> {jkd_$vo.filename}
+								   	</td>
+								  	 	<else />
+								   	<td>
+								   		<img src="__PUBLIC__/tplcenter/file/other.gif" width="16" height="16"> {jkd_$vo.filename}
+								   	</td>
+								    </in>
+								   	<td>{jkd_$vo.filename|gettplname}</td>
+								   	<td>{jkd_$vo.size|byte_format}</td>
+								   	<td>{jkd_$vo.mtime|getcolordate='Y-m-d H:i:s',###}</td>
+								   	<php>if(ereg("\.html|\.htm|\.txt|\.css|\.php|\.js",$vo['filename'])){</php>
+								   	<td>
+								   		<a href="__URL__/Add/id/<php>echo str_replace('\.', '', jkd_url_repalce($dirpath, 'desc'));</php>|{jkd_:str_replace('.'.$vo['ext'],'*'.$vo['ext'],$vo['filename'])}">编辑</a> 
+								   		<a link="__URL__/Del/id/<php>echo str_replace('\.', '', jkd_url_repalce($dirpath, 'desc'));</php>|{jkd_:str_replace('.'.$vo['ext'],'*'.$vo['ext'],$vo['filename'])}" href="javascript:void(0)" class="del" name="{jkd_$vo.filename}">删除</a></td>
+								   		<php>}else{</php>
+								   	<td>
+								   		<a href="{jkd_$dirpath}/{jkd_:str_replace('\.', '' , $vo.filename)}" target="_blank">浏览</a> 
+								   		<a link="__URL__/Del/id/<php>echo str_replace('\.', '', jkd_url_repalce($dirpath, 'desc'));</php>|{jkd_:str_replace('.'.$vo['ext'],'*'.$vo['ext'],$vo['filename'])}" href="javascript:void(0)" class="del" name="{jkd_$vo.filename}">删除</a>
+								   	</td>
+								   	<php>}</php>
+								</tr>
+								</eq>  
+								</volist>
+							</table>
+	                	</div>
+                	</div>
+            	</div>
+        	</div>
+	        <div class="clear"></div>
+	        <!-- 公告底部 -->
+	        <include file="Common:foot" />
+	        <script>
+	        	$(function(){
+	    	        $(".del").click(function(){
+	    	            var delLink=$(this).attr("link");
+	    	            $this = $(this);
+	    	            popup.confirm('确定删除【<b>'+$(this).attr("name")+'</b>】，确定?','温馨提示',function(action){
+	    	                if(action == 'ok'){
+	    	                    delByLink(delLink, $this);
+	    	                }
+	    	            });
+	    	            return false;
+	    	        });
+	        	});
+	        </script>
+		</div>
+   </body>
+</html>

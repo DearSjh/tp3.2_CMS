@@ -1,0 +1,48 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    	<style type='text/css'> .tab td {padding:15px 10px;}</style>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item hr">
+                        <div class="current">内容模型管理</div>
+                    </div>
+                    <table width="100%" border="0" cellspacing="0" cellpadding="0" class="tab">
+                       	<tr>                                
+                       		<td align="center" colspan='4'>
+                       			<a href="{jkd_:U('Jkd/ArticleContentModel/article_model_list')}" class="btn submit">文章模型</a>
+                       		</td>
+                       		<td align="center" colspan='4'>
+                       			<a href="{jkd_:U('Jkd/ProductContentModel/product_model_list')}" class="btn submit">产品模型</a>
+                       		</td>
+                       		<td align="center" colspan='4'>
+                       			<a href="{jkd_:U('Jkd/PageContentModel/page_model_list')}" class="btn submit">单页模型</a>
+                       		</td>
+                       		<td align="center" colspan='4'>
+                       			<a href="{jkd_:U('Jkd/Global/site_conf_model_list')}" class="btn submit">站点配置模型</a>
+                       		</td>
+                       		<td align="center" colspan='4'>
+                       			<a href="{jkd_:U('Jkd/MessageContentModel/message_model_list')}" class="btn submit">留言模型</a>
+                       		</td>
+                    	</tr>
+					</table>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+    </body>
+</html>

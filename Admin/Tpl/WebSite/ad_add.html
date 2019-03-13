@@ -1,0 +1,125 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    	 <css href="__PUBLIC__/css/img_about.css"/>
+        <!-- kindeditor -->
+        <script src="__ROOT__/public/editors/kindeditor/kindeditor.js"></script>
+		<script src="__ROOT__/public/editors/kindeditor/lang/zh_CN.js"></script>
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="Item">
+                        <div class="current">添加编辑新闻</div>
+                    </div>
+                    <form action='' method='post'>
+                        <table width="100%" border="0" cellspacing="0" cellpadding="0" class="table1">
+                        	
+                            <tr>
+                                <th width="100">广告说明：</th>
+                                <td><input id="title" type="text" class="input" size="30" name="info[explain]" value="{jkd_$ad_info.ad_explain}"/></td>
+                            </tr>
+                            <tr>
+                                <th>广告图片地址：</th>
+                                <td>
+                                	<div class="instructions del_image">删除</div>
+                                    <div class="droparea spot" id="ad_img" style="background-image: url({jkd_$ad_info.ad_img_src}); cursor:pointer;background-size: 220px 160px;">
+	                                    <input type="hidden" name="info[ad_img_src]" id="ad_img_val" value="{jkd_$ad_info.ad_img_src}">
+                                    </div>
+                            	</td>
+                            </tr>
+                            <tr>
+                                <th>alt属性：</th>
+                                <td><input type="text" class="input" size="20" name="info[ad_img_alt]" value="{jkd_$ad_info.ad_img_alt}"/> （seo优化）</td>
+                            </tr>
+                            <tr>
+                                <th>广告(宽)：</th>
+                                <td><input type="text" class="input" size="20" name="info[ad_img_width]" value="{jkd_$ad_info.ad_img_width}"/></td>
+                            </tr>
+                            <tr>
+                                <th>广告(高)：</th>
+                                <td><input type="text" class="input" size="20" name="info[ad_img_height]" value="{jkd_$ad_info.ad_img_height}"/></td>
+                            </tr>
+                            <tr>
+                                <th>排序：</th>
+                                <td><input type="text" class="input" size="5" name="info[sort]" value="{jkd_$ad_info.sort}" /></td>
+                            </tr>
+                            <tr>
+                                <th>跳转地址：</th>
+                                <td><input type="text" class="input" size="70" name="info[ad_url]" value="{jkd_$ad_info.ad_url}"/></td>
+                            </tr>
+                            <tr>
+                                <th>点击量：</th>
+                                <td><input type="text" class="input" size="5" name="info[click]" value="{jkd_$ad_info.click}" id='jkd_random_val'/>&nbsp;&nbsp;&nbsp;<input type='button' value='随机' id='jkd_random' style='min-width:50px;' class="btn"></td>
+                            </tr>
+                            <if condition="!empty($id)">
+                            	<input type='hidden' value="{jkd_$id}" name='id' />
+                            </if>
+                        </table>
+                    </form>
+                    <div class="commonBtnArea" >
+                        <button class="btn submit">提交</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+            $(function(){
+                $(".submit").click(function(){
+                    if($('#title').val()==''){
+                        popup.error('广告说明不能为空！');
+                        return false;
+                    }
+                    commonAjaxSubmit("");
+                    return false;
+                });
+                //随机点击量
+                $("#jkd_random").click(function(){
+                	var other_val =  Math.floor(Math.random()*1000);
+                    $('#jkd_random_val').val(other_val);
+                }); 
+                //删除图片  123
+                $(".del_image").click(function(){
+                	$(this).siblings('.spot').css('background-image','');
+                	$(this).siblings('.spot').children('input').val('');
+               	}); 
+            });
+        </script>
+		<script type='text/javascript'>	
+		KindEditor.ready(function(K) {
+	          K.create();
+	          var editor = K.editor({
+	              allowFileManager : true,
+	              uploadJson : '__ROOT__/public/editors/kindeditor/php/upload_json.php?dirname=ad',
+	              fileManagerJson:'__ROOT__/public/editors/kindeditor/php/file_manager_json.php?dirname=ad'
+	              //sdl:false
+	          });
+	          K('#ad_img').click(function() {
+	              editor.loadPlugin('image', function() {
+	                  editor.plugin.imageDialog({
+	                      imageUrl : K('#ad_img_val').val(),
+	                      clickFn : function(url, title, width, height, border, align) {
+	                          K('#ad_img_val').val(url);
+                              $('#ad_img').css('background-image','url('+url+')').css('background-size','220px 160px');
+	                          editor.hideDialog();
+	                      }
+	                  });
+	              });
+	          });
+	      });
+		</script>
+    </body>
+</html>

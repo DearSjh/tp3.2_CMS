@@ -1,0 +1,88 @@
+/* menu初始化 */
+.tab_menu {
+    margin: 15px 0;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #ddd #ddd #fff #fff;
+    text-shadow: 0 1px 0 #FFFFFF;
+    border-collapse: separate;
+}
+.tab_menu td {
+    padding: 5px 10px;
+    margin: 15px 0;
+    line-height: 24px;
+	border-top: 1px dotted #ddd;
+}
+.tab_menu thead td { text-align: left; }
+.tab_menu tbody tr:hover { background: #fff; }
+/* 显示排序宽度   */
+.tab_menu .show_order_input {width:45px;}
+/* 栏目名称宽度  */
+.tab_menu .nav_name_input {width:100px;}
+
+/* 添加二级菜单  */
+.tab_menu .add_two_menu{
+	margin-left: 10px;
+	margin-right: 5px; 
+	padding-left:17px; 
+	line-height:25px; 
+	*line-height: 16px; 
+	background:url(./bg_repno.gif) no-repeat 0 1px; 
+	color:#F5F5F5; zoom: 1;
+}
+
+/* 添加三级菜单  */
+.tab_menu .add_three_menu{
+	margin-left: 10px;
+	margin-right: 5px; 
+	padding-left:17px; 
+	line-height:25px; 
+	*line-height: 16px; 
+	background:url(./bg_repno.gif) no-repeat 0 -599px; 
+	color:#F5F5F5; zoom: 1;
+} 	
+/* 添加四级菜单  */
+.tab_menu .add_four_menu{
+	margin-left: 10px;
+	margin-right: 5px; 
+	padding-left:17px; 
+	line-height:25px; 
+	*line-height: 16px; 
+	background:url(./bg_repno.gif) no-repeat 0 -599px; 
+	color:#F5F5F5; zoom: 1;
+}
+
+/* 添加顶级菜单  */
+.tab_menu .add_top_menu { 
+	padding-left:17px; 
+	line-height:25px; 
+	background:url(./bg_repno.gif) no-repeat 0 1px;
+	*background:url(./bg_repno.gif) no-repeat 0 0; 
+	color:#F60;
+}
+
+/* 显示添加子菜单文字  */
+.tab_menu .add_two_menu:hover,.add_three_menu:hover,.add_four_menu:hover { 
+	text-decoration:none; color:#F60 !important;
+}
+
+.tab_menu .open {text-align: center;cursor: pointer;}
+
+/*  阶梯显示菜单背景   */
+.tab_menu .menu_two {padding-left:55px; background:url(./bg_repno.gif) no-repeat -240px -550px;}
+.tab_menu .menu_three {padding-left:110px; background:url(./bg_repno.gif) no-repeat -185px -600px;}
+.tab_menu .menu_four {margin-left:140px;padding-left:60px; background:url(./bg_repno.gif) no-repeat -240px -550px;}
+
+/* 公告展开隐藏  [-][+]  */
+.tab_menu .open_close {width:4%;}
+.tab_menu .show_sort {width:6%;}
+.tab_menu .menu_name {width:52%;}
+.tab_menu .menu_other {width:28%;}
+
+.add_friendlink{ 
+	padding-left:17px; 
+	line-height:25px; 
+	background:url(./bg_repno.gif) no-repeat 0 1px; 
+	*background:url(./bg_repno.gif) no-repeat 0 0; 
+	color:#F60;
+}

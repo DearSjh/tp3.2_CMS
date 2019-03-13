@@ -1,0 +1,70 @@
+<div id="Top">
+	<div class="logo"><a href=""><img src="__PUBLIC__/img/logo.png" style="border: 0" /></a></div>
+	<div class="help"><a href="javascript:void(0);">后台地图</a><span><a href="javascript:void(0);" target="_blank">关于</a></span></div>
+	<div class="menu">
+		<ul> 
+			<li <if condition="MODULE_NAME eq 'Index'">class="fisrt_current"<else/>class="fisrt"</if>>
+				<span><a href="{jkd_:U('Index/index')}" >管理首页</a></span>
+			</li>
+			<li <if condition="MODULE_NAME eq 'Global'">class="current"</if>>
+				<span><a href="{jkd_:U('Global/site_conf')}">全局管理</a></span>
+			</li>
+			<li <if condition="MODULE_NAME eq 'Menu'">class="current"</if>>
+				<span><a href="{jkd_:U('Menu/menu_list')}">栏目管理</a></span>
+			</li>
+			<!-- 循环头部导航 -->
+			<php>
+				$admin_top_nav_list = admin_top_nav();
+				$now_url = 'http://'.$_SERVER['HTTP_HOST'].$_SERVER['REQUEST_URI'];
+			</php>
+			<foreach name="admin_top_nav_list" item='jkd'>
+			<li  <if condition="$now_url eq $jkd['nav_url']">class="current"</if>>
+				<span><a href="{jkd_$jkd.nav_url}">{jkd_$jkd.nav_name}</a></span>
+			</li>
+			</foreach>
+			<php>$now_developer_status = get_conf('IS_DEVELOPER');</php>
+			<if condition="$now_developer_status eq 1">
+			<li <if condition="MODULE_NAME eq 'Dev' or MODULE_NAME eq 'ArticleContentModel' or MODULE_NAME eq 'ProductContentModel' or MODULE_NAME eq 'PageContentModel'">class="current"</if>>
+				<span><a href="{jkd_:U('Dev/contentModel')}">开发者模式</a></span>
+			</li>
+			</if>
+			<li <if condition="MODULE_NAME eq 'WebSite'">class="current"</if>>
+				<span><a href="{jkd_:U('WebSite/ad_list')}">网站功能</a></span>
+			</li>
+			<php>$now_developer_status = get_conf('IS_TPL_MANAGE');</php>
+			<if condition="$now_developer_status eq 1">
+			<li <if condition="MODULE_NAME eq 'TplCenter'">class="current"</if>>
+				<span><a href="{jkd_:U('TplCenter/index')}">模板管理</a></span>
+			</li>
+			</if>
+			<li <if condition="MODULE_NAME eq 'Database'">class="end_current"<else />class="end"</if>>
+				<span><a href="{jkd_:U('Database/database_list')}">数据管理</a></span>
+			</li> 
+		</ul>
+	</div>
+</div>
+<div id="Tags">
+	<div class="userPhoto"><img src="__PUBLIC__/img/userPhoto.png" /> </div>
+	<div class="navArea">
+		<div class="userInfo"><div><a href="{jkd_:U('Global/site_conf')}" class="sysSet"><span>&nbsp;</span>系统设置</a> <a href="{Jkd_:U('Common/loginOut')}" class="loginOut"><span>&nbsp;</span>退出系统</a></div>欢迎您，<php>echo $_SESSION['jkd_uname']</php>&nbsp;|&nbsp; <a target="_blank" href="{jkd_:C('site_url')}" class='site_index'>网站首页</a></div>
+		<div class="nav">
+			<font id="today"></font>您的位置：
+			<if condition="MODULE_NAME eq 'Index'">
+			后台管理 > 管理首页
+			<elseif condition="MODULE_NAME eq 'Global'" />
+			后台管理 > 全局管理
+			<elseif condition="MODULE_NAME eq 'Menu'" />
+			后台管理 > 栏目管理
+			<elseif condition="MODULE_NAME eq 'Dev'" />
+			后台管理 > 开发者模式
+			<elseif condition="MODULE_NAME eq 'WebSite'" />
+			后台管理 > 网站功能
+			<elseif condition="MODULE_NAME eq 'TplCenter'" />
+			后台管理 > 模板管理
+			<elseif condition="MODULE_NAME eq 'Database'" />
+			后台管理 > 数据管理
+			</if>
+		</div>
+	</div>
+</div>
+<div class="clear"></div>

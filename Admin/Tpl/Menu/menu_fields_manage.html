@@ -1,0 +1,73 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>后台管理首页</title>
+    	<include file="Common:into_style" />
+    </head>
+    <body>
+        <div class="wrap">
+            <!-- 公共头部 start -->
+			<include file="Common:header" />
+            <!-- 公共头部 end -->
+            <div class="mainBody">
+				<!-- 公告左侧 start -->
+				<include file="Common:left" />
+				<!-- 公告左侧 end -->
+                <div id="Right">
+                    <div class="contentArea">
+	                    <div class="Item">
+	                        <div class="current">字段显示控制</div>
+	                    </div>
+	                    <form action="" method="post">
+	                        <table width="50%" border="0" cellspacing="0" cellpadding="0" class="table1" style='float:left'>
+	                        	<tr>
+	                                <th width="120"><font color='blue'>（9）默认字段</font></th>
+	                                <td width="150"></td>
+								</tr>
+								<foreach name="default_fields_list" key='k' item='jkd'>
+	                            <tr>
+	                                <th width="120">{jkd_$jkd.txt}：</th>
+	                                <td>
+	                                	<label><input type="radio" name="a{jkd_$k}" value="1" <if condition="$jkd['show'] eq 1"> checked="checked"</if> /> 显示</label>&nbsp;&nbsp;
+	                                    <label><input type="radio" name="a{jkd_$k}" value="0" <if condition="$jkd['show'] eq 0"> checked="checked"</if> /> 隐藏</label>
+									</td>
+								</tr>
+								</foreach>
+	                        </table>
+	                        <table width="50%" border="0" cellspacing="0" cellpadding="0" class="table1" style='float:left'>
+	                        	<tr>
+	                                <th width="120"><font color='blue'>（new）新增字段</font></th>
+	                                <td width="150"></td>
+								</tr>
+								<foreach name="extend_fields_list" key='k' item='jkd'>
+	                            <tr>
+	                                <th width="120">{jkd_$jkd.form_explain}：</th>
+	                                <td width="150">
+	                                	<label><input type="radio" name="field_{jkd_$jkd.field_id}" <if condition="$jkd['is_show'] eq 1">checked="checked"</if> value="1" /> 显示</label>&nbsp;&nbsp;
+	                                    <label><input type="radio" name="field_{jkd_$jkd.field_id}" <if condition="$jkd['is_show'] eq 0">checked="checked"</if> value="0"  /> 隐藏</label>
+									</td>
+								</tr>
+								</foreach>
+	                    		<input type='hidden' value="{jkd_$cid}" name='cid' />
+	                        </table>
+	                    </form>
+	                    <div class="commonBtnArea" >
+	                        <button class="btn submit">提交</button>
+	                    </div>
+	                </div>
+                </div>
+            </div>
+        </div>
+        <div class="clear"></div>
+        <!-- 公告底部 -->
+        <include file="Common:foot" />
+        <script type="text/javascript">
+        $(function(){
+		    $(".submit").click(function(){
+		        commonAjaxSubmit();
+		    });
+        });
+		</script>
+    </body>
+</html>

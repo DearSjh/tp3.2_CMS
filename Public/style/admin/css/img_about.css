@@ -1,0 +1,36 @@
+div.spot {
+    float: left;
+    margin: 0 20px 0 0;
+    width: 220px;
+    min-height: 160px;   
+    border: 2px dashed #ddd;
+	border-top:0px;            	
+}
+.droparea {
+    position: relative;
+    text-align: center;
+}
+.instructions {
+    opacity: 0.8;
+    width: 220px;            
+    background-color: #cccccc;
+    height: 25px;
+    z-index: 10;
+    zoom: 1;
+	text-align: center;
+    border: 2px dashed #ddd;    
+	border-bottom:0px;        
+    background-position: initial initial;
+    background-repeat: initial initial;
+    cursor: pointer;
+}
+.droparea div, .droparea input {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    height: 100%;
+}
+.droparea input {
+    cursor: pointer;
+    opacity: 0;
+}
